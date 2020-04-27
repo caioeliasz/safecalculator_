@@ -1,11 +1,9 @@
-import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:math_expressions/math_expressions.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'hidden_storage.dart';
 
 
@@ -30,8 +28,8 @@ class _calculadoraTesteState extends State<calculator> {
           equation = "0";
         }
       } else if (buttonText == "=") {
-        if (equation == '3') {
-          openHiddenPage('Arquivos',);
+        if (equation == '0') {
+          openHiddenPage(context,'Arquivos',);
         }
 
         expression = equation;
@@ -81,7 +79,32 @@ class _calculadoraTesteState extends State<calculator> {
         )
     );
   } //cria um botao na calculadora
-
+  void Settings(BuildContext context){
+    Navigator.push(context, MaterialPageRoute(
+      builder: (context) {
+        return Scaffold(
+          appBar: AppBar(
+            backgroundColor: Colors.blueGrey[900],
+            title: Text('Configurações'),
+          ),
+          body: Container(
+            height: 80,
+            width: 400,
+            margin: EdgeInsets.only(top: 20),
+            decoration: BoxDecoration(color: Colors.black),
+            child: FlatButton(
+              child: Padding(
+                padding: EdgeInsets.only(right: 100),
+                child: Text("Definir senha",
+                style: TextStyle(fontWeight: FontWeight.normal,fontSize: 20,color: Colors.white),
+                ),
+              ),
+            ),
+          ),
+        );
+      }
+    ));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -92,14 +115,12 @@ class _calculadoraTesteState extends State<calculator> {
               alignment: Alignment.centerRight,
               color: Colors.white,
               icon: Icon(Icons.settings),
-              onPressed: null,
+              onPressed: () => Settings(context),
             )
-
           ],
           backgroundColor: Colors.black,
           title: Text('Calculadora',
-              style: TextStyle(
-                  color: Colors.white
+            style: TextStyle(color: Colors.white
               )
           )
       ),
@@ -204,6 +225,7 @@ class _calculadoraTesteState extends State<calculator> {
       ),
     );
   }
+
 }
 
 

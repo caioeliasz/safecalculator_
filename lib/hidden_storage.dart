@@ -1,59 +1,59 @@
-import 'calculator.dart';
-import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:math_expressions/math_expressions.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 
-openHiddenPage(String AppBarText,) {
-  return Scaffold(
-    backgroundColor: Colors.black,
-    appBar: AppBar(
-      title: Text(AppBarText),
-    ),
-    body:
-        ListView(
-          children:
-          <Widget>[
-            Container(
-              child: Table(
-                children: [
-                  TableRow(
-                      children: [
-                        folderSkin('Fotos', Icons.photo_camera),
-                        folderSkin('Videos', Icons.video_library),
-                      ]
-                  ),
-                  TableRow(
-                      children: [
-                        folderSkin('Documentos', Icons.folder),
-                        folderSkin('Captura de tela', Icons.photo),
-                      ]
-                  ),
-                  TableRow(
-                      children: [
-                        folderSkin('Arquivos', Icons.archive),
-                        folderSkin('Compromissos', Icons.assignment),
-                      ]
-                  ),
-                  TableRow(
-                      children: [
-                        folderSkin('Bank Passwords', Icons.attach_money),
-                        folderSkin('Notas', Icons.note),
-                      ]
-                  ),
-                ],
-              ),
-            )
-          ],
-        ),
-      );
-    }
-Widget folderSkin(String FolderName, IconData iconUsed) {
+void openHiddenPage(BuildContext context, String AppBarText){
+  Navigator.push(context, MaterialPageRoute(
+      builder: (context){
+        return Scaffold(
+          backgroundColor: Colors.black,
+          appBar: AppBar(
+            title: Text(AppBarText),
+          ),
+          body:
+          ListView(
+            children:
+            <Widget>[
+              Container(
+                child: Table(
+                  children: [
+                    TableRow(
+                        children: [
+                          folderSkin(context,'Fotos', Icons.photo_camera),
+                          folderSkin(context,'Videos', Icons.video_library),
+                        ]
+                    ),
+                    TableRow(
+                        children: [
+                          folderSkin(context,'Documentos', Icons.folder),
+                          folderSkin(context,'Captura de tela', Icons.photo),
+                        ]
+                    ),
+                    TableRow(
+                        children: [
+                          folderSkin(context,'Arquivos', Icons.archive),
+                          folderSkin(context,'Compromissos', Icons.assignment),
+                        ]
+                    ),
+                    TableRow(
+                        children: [
+                          folderSkin(context,'Bank Passwords', Icons.attach_money),
+                          folderSkin(context,'Notas', Icons.note),
+                        ]
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
+        );
+      }
+  ));
+}
+Widget folderSkin(BuildContext context, FolderName, IconData iconUsed) {
   return Container(
     decoration: BoxDecoration(
         color: Colors.grey[900],
@@ -64,53 +64,57 @@ Widget folderSkin(String FolderName, IconData iconUsed) {
       padding: EdgeInsets.all(20),
       icon: Icon(iconUsed),
       onPressed: () {
-        hiddenStorage(FolderName);
+        hiddenStorage(context,FolderName);
       },
     ),
     padding: EdgeInsets.fromLTRB(50, 55, 45, 55),
     margin: EdgeInsets.all(10),
   );
 }//cria uma pasta(fotos,videos,etc)
-hiddenStorage(FolderName){
-        return Scaffold(
-          backgroundColor: Colors.black,
-          appBar: AppBar(
-            backgroundColor: Colors.black54,
-            title: Text(FolderName),
-          ),
-          body: CustomScrollView(
-            slivers: <Widget>[
-              SliverToBoxAdapter(
-                child: Container(
-                  margin: EdgeInsets.only(left: 20, top: 50),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text("Galery",
-                        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 30),
-                      ),
-                      SizedBox(height: 10,)
-                    ],
-                  ),
+void hiddenStorage(BuildContext context, FolderName){
+  Navigator.push(
+    context, MaterialPageRoute(
+    builder: (context){
+      return Scaffold(
+        backgroundColor: Colors.black,
+        appBar: AppBar(
+          backgroundColor: Colors.black54,
+        ),
+        body: CustomScrollView(
+          slivers: <Widget>[
+            SliverToBoxAdapter(
+              child: Container(
+                margin: EdgeInsets.only(left: 20, top: 50, bottom: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text("Galeria",
+                      style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 30),
+                    ),
+                    SizedBox(height: 3,),
+                    Text(FolderName,
+                      style: TextStyle(fontWeight: FontWeight.normal, color: Colors.white, fontSize: 20),
+                    )
+                  ],
                 ),
               ),
-              SliverStaggeredGrid.countBuilder(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 10,
-                  crossAxisSpacing: 10,
-                  staggeredTileBuilder: (int index) => StaggeredTile.fit(1),
-                  itemBuilder: (context, index) {
-                    return Container(
-                      margin: EdgeInsets.all(20),
-                      child: ClipRRect(
-                        child: Image.asset("assets/$index.png"),
-                      ),
-                    );
-                  }, itemCount: 5)
-            ],
-          ),
-        );
-      }
-
-
-
+            ),
+            SliverStaggeredGrid.countBuilder(
+                crossAxisCount: 2,
+                mainAxisSpacing: 10,
+                crossAxisSpacing: 10,
+                staggeredTileBuilder: (int index) => StaggeredTile.fit(1),
+                itemBuilder: (context, index) {
+                  return Container(
+                    margin: EdgeInsets.all(50),
+                    child: ClipRRect(
+                    ),
+                  );
+                }, itemCount: 6)
+          ],
+        ),
+      );
+    }
+  )
+  );
+}
