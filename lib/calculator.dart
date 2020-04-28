@@ -58,7 +58,7 @@ class _calculadoraTesteState extends State<calculator> {
         height: MediaQuery
             .of(context)
             .size
-            .width * 0.23 * buttonHeight,
+            .width * 0.20 * buttonHeight,
         color: buttonColor,
         child: FlatButton(
             padding: EdgeInsets.all(5.0),
@@ -79,52 +79,36 @@ class _calculadoraTesteState extends State<calculator> {
         )
     );
   } //cria um botao na calculadora
-  void Settings(BuildContext context){
-    Navigator.push(context, MaterialPageRoute(
-      builder: (context) {
-        return Scaffold(
-          appBar: AppBar(
-            backgroundColor: Colors.blueGrey[900],
-            title: Text('Configurações'),
-          ),
-          body: Container(
-            height: 80,
-            width: 400,
-            margin: EdgeInsets.only(top: 20),
-            decoration: BoxDecoration(color: Colors.black),
-            child: FlatButton(
-              child: Padding(
-                padding: EdgeInsets.only(right: 100),
-                child: Text("Definir senha",
-                style: TextStyle(fontWeight: FontWeight.normal,fontSize: 20,color: Colors.white),
-                ),
-              ),
-            ),
-          ),
-        );
-      }
-    ));
-  }
+  
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          actions: <Widget>[
-            IconButton(
-              alignment: Alignment.centerRight,
-              color: Colors.white,
-              icon: Icon(Icons.settings),
-              onPressed: () => Settings(context),
-            )
-          ],
           backgroundColor: Colors.black,
-          title: Text('Calculadora',
-            style: TextStyle(color: Colors.white
-              )
+          title: Padding(
+            padding: const EdgeInsets.only(left: 80.0),
+            child: Text('Calculadora',
+              style: TextStyle(color: Colors.white
+                )
+            ),
           )
       ),
-
+      drawer: Drawer(
+        child: ListView(
+          children: <Widget>[
+            DrawerHeader(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(colors: <Color>[
+                Colors.blueAccent,
+                Colors.greenAccent])
+              )
+            ),
+            CustomListTile(Icons.lock, 'Definir uma senha', (){}),
+            CustomListTile(Icons.lock_outline, 'Redefinir Senha',(){})
+          ],
+        )
+      ),
       body: Column(
           children: <Widget>[
 
@@ -227,6 +211,57 @@ class _calculadoraTesteState extends State<calculator> {
   }
 
 }
+
+class CustomListTile extends StatelessWidget {
+
+  IconData icon;
+  String text;
+  Function ontap;
+
+  CustomListTile(this.icon, this.text,this.ontap);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(left: 8.0, right: 8),
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border(
+            bottom: BorderSide(
+              color: Colors.grey.shade400
+            )
+          )
+        ),
+        height: 50,
+        child: InkWell(
+          onTap: (){ontap;},
+          splashColor: Colors.blueAccent,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Row(
+                children: <Widget>[
+                  Icon(icon),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(text,style: TextStyle(
+                      fontSize: 16
+                    ),
+                    ),
+                  ),
+                ],
+              ),
+              Icon(Icons.arrow_right)
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
+
 
 
 

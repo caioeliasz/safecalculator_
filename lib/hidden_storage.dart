@@ -99,19 +99,13 @@ void hiddenStorage(BuildContext context, FolderName){
                 ),
               ),
             ),
-            SliverStaggeredGrid.countBuilder(
-                crossAxisCount: 2,
-                mainAxisSpacing: 10,
-                crossAxisSpacing: 10,
-                staggeredTileBuilder: (int index) => StaggeredTile.fit(1),
-                itemBuilder: (context, index) {
-                  return Container(
-                    margin: EdgeInsets.all(50),
-                    child: ClipRRect(
-                    ),
-                  );
-                }, itemCount: 6)
           ],
+        ),
+        floatingActionButton: FloatingActionButton.extended(
+          backgroundColor: Colors.redAccent,
+          onPressed: null,
+          label: Text('Galery'),
+          icon: Icon(Icons.photo),
         ),
       );
     }
