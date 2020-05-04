@@ -79,7 +79,6 @@ class _calculadoraTesteState extends State<calculator> {
         )
     );
   } //cria um botao na calculadora
-  
 
   @override
   Widget build(BuildContext context) {
@@ -98,14 +97,15 @@ class _calculadoraTesteState extends State<calculator> {
         child: ListView(
           children: <Widget>[
             DrawerHeader(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(colors: <Color>[
-                Colors.blueAccent,
-                Colors.greenAccent])
+              child: Icon(Icons.account_circle, size: 100, color: Colors.white,),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(colors: <Color>[
+                  Colors.orange,
+                  Colors.orange[300]])
               )
             ),
-            CustomListTile(Icons.lock, 'Definir uma senha', (){}),
-            CustomListTile(Icons.lock_outline, 'Redefinir Senha',(){})
+            CustomListTile(Icons.lock, 'Definir uma senha',() => PassWord(context)),
+            CustomListTile(Icons.lock_open, 'Redefinir Senha',() => RedifinePassWord(context))
           ],
         )
       ),
@@ -137,9 +137,9 @@ class _calculadoraTesteState extends State<calculator> {
                         children: [
                           TableRow(
                               children: [
-                                buildButton("C", 1, Colors.tealAccent[400]),
-                                buildButton("<", 1, Colors.cyan[300]),
-                                buildButton("/", 1, Colors.cyan[300])
+                                buildButton("C", 1, Colors.orange[400]),
+                                buildButton("<", 1, Colors.orange[400]),
+                                buildButton("/", 1, Colors.orange[400])
                               ]
                           ),
                           TableRow(
@@ -182,22 +182,22 @@ class _calculadoraTesteState extends State<calculator> {
                       children: [
                         TableRow(
                             children: [
-                              buildButton("*", 1, Colors.cyan[300]),
+                              buildButton("*", 1, Colors.orange[400]),
                             ]
                         ),
                         TableRow(
                             children: [
-                              buildButton("+", 1, Colors.cyan[300]),
+                              buildButton("+", 1, Colors.orange[400]),
                             ]
                         ),
                         TableRow(
                             children: [
-                              buildButton("-", 1, Colors.cyan[300]),
+                              buildButton("-", 1, Colors.orange[400]),
                             ]
                         ),
                         TableRow(
                             children: [
-                              buildButton("=", 2, Colors.tealAccent[400]),
+                              buildButton("=", 2, Colors.blueAccent),
                             ]
                         ),
                       ],
@@ -209,7 +209,290 @@ class _calculadoraTesteState extends State<calculator> {
       ),
     );
   }
+}
 
+void PassWord(BuildContext context){
+  Navigator.push(context, MaterialPageRoute(
+    builder: (context){
+      return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.orange,
+          title: Text('Definir uma senha'),
+        ),
+        body: Column(
+          children: <Widget>[
+            Container(
+              margin: EdgeInsets.only(top: 50),
+              padding: EdgeInsets.fromLTRB(8, 8, 8, 0),
+              alignment: Alignment.topLeft,
+              child: Text('Criando uma conta.',
+                style: TextStyle(fontSize: 35),),),
+            Container(
+              margin: EdgeInsets.only(right: 50),
+              padding: EdgeInsets.fromLTRB(8, 0, 8, 5),
+              alignment: Alignment.topLeft,
+              child: Text('Criando uma conta, você poderá redefiní-la posteriormente.',
+                style: TextStyle(fontSize: 15),),),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                    decoration: BoxDecoration(
+                        border: Border(
+                          top: BorderSide(
+                              color: Colors.grey.shade400
+                          ),
+                          bottom: BorderSide(
+                              color: Colors.grey.shade400
+                          ),
+                          left: BorderSide(
+                              color: Colors.grey.shade400
+                          ),
+                          right: BorderSide(
+                              color: Colors.grey.shade400
+                          ),
+                        )
+                    ),
+                    margin: EdgeInsets.all(10),
+                    width: 400,
+                    height: 40,
+                    child: Row(
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Icon(Icons.account_circle),
+                        ),
+                        Text('Usuario',style: TextStyle(fontSize: 15),)
+                      ],
+                    ),
+                  ),
+                Container(
+                  alignment: Alignment.center,
+                  child: Container(
+                    decoration: BoxDecoration(
+                        border: Border(
+                          top: BorderSide(
+                                color: Colors.grey.shade400
+                            ),
+                          bottom: BorderSide(
+                              color: Colors.grey.shade400
+                          ),
+                          left: BorderSide(
+                              color: Colors.grey.shade400
+                          ),
+                          right: BorderSide(
+                              color: Colors.grey.shade400
+                          ),
+                        )
+                    ),
+                    margin: EdgeInsets.all(10),
+                    width: 400,
+                    height: 40,
+                    child: Row(
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Icon(Icons.lock_outline),
+                        ),
+                        Text('Senha',style: TextStyle(fontSize: 15),)
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Container(
+              margin: EdgeInsets.only(top: 80,bottom: 8),
+              child: Text('Defina seu PIN',
+                style: TextStyle(fontSize: 18),
+              ),
+            ),
+            Container(
+              decoration: BoxDecoration(
+                  border: Border(
+                    top: BorderSide(
+                        color: Colors.grey.shade500
+                    ),
+                    bottom: BorderSide(
+                        color: Colors.grey.shade500
+                    ),
+                    left: BorderSide(
+                        color: Colors.grey.shade500
+                    ),
+                    right: BorderSide(
+                        color: Colors.grey.shade500
+                    ),
+                  )
+              ),
+              child: Row(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Icon(Icons.lock_open),
+                  ),
+                  Text('PIN',style: TextStyle(fontSize: 18),)
+                ],
+              ),
+              width: 100,
+              height: 40,
+            ),
+            Container(
+              margin: EdgeInsets.only(top: 110),
+              alignment: Alignment.bottomCenter,
+              child: RaisedButton(
+                onPressed: (){},
+                elevation: 10,
+                color: Colors.orange,
+                child: Text('Criar conta.',style: TextStyle(color: Colors.white),),
+              ),
+            )
+          ],
+        ),
+      );
+    }
+  ));
+}
+void RedifinePassWord(BuildContext context){
+  Navigator.push(context, MaterialPageRoute(
+      builder: (context){
+        return Scaffold(
+          appBar: AppBar(
+            backgroundColor: Colors.blueAccent,
+            title: Text('Definir uma senha'),
+          ),
+          body: Column(
+            children: <Widget>[
+              Container(
+                margin: EdgeInsets.only(top: 50),
+                padding: EdgeInsets.fromLTRB(8, 8, 8, 2),
+                alignment: Alignment.topLeft,
+                child: Text('Redefinindo sua senha.',
+                  style: TextStyle(fontSize: 35),),),
+              Container(
+                margin: EdgeInsets.only(bottom: 5),
+                padding: EdgeInsets.fromLTRB(8, 2, 8, 4),
+                alignment: Alignment.topLeft,
+                child: Text('Através da sua conta, redefina seu PIN.',
+                  style: TextStyle(fontSize: 15),),),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Container(
+                    decoration: BoxDecoration(
+                        border: Border(
+                          top: BorderSide(
+                              color: Colors.grey.shade400
+                          ),
+                          bottom: BorderSide(
+                              color: Colors.grey.shade400
+                          ),
+                          left: BorderSide(
+                              color: Colors.grey.shade400
+                          ),
+                          right: BorderSide(
+                              color: Colors.grey.shade400
+                          ),
+                        )
+                    ),
+                    margin: EdgeInsets.all(10),
+                    width: 400,
+                    height: 40,
+                    child: Row(
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Icon(Icons.account_circle),
+                        ),
+                        Text('Usuario',style: TextStyle(fontSize: 15),)
+                      ],
+                    ),
+                  ),
+                  Container(
+                    alignment: Alignment.center,
+                    child: Container(
+                      decoration: BoxDecoration(
+                          border: Border(
+                            top: BorderSide(
+                                color: Colors.grey.shade400
+                            ),
+                            bottom: BorderSide(
+                                color: Colors.grey.shade400
+                            ),
+                            left: BorderSide(
+                                color: Colors.grey.shade400
+                            ),
+                            right: BorderSide(
+                                color: Colors.grey.shade400
+                            ),
+                          )
+                      ),
+                      margin: EdgeInsets.all(10),
+                      width: 400,
+                      height: 40,
+                      child: Row(
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Icon(Icons.lock_outline),
+                          ),
+                          Text('Senha',style: TextStyle(fontSize: 15),)
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 80,bottom: 8),
+                child: Text('Redefina seu PIN',
+                  style: TextStyle(fontSize: 18),
+                ),
+              ),
+              Container(
+                decoration: BoxDecoration(
+                    border: Border(
+                      top: BorderSide(
+                          color: Colors.grey.shade500
+                      ),
+                      bottom: BorderSide(
+                          color: Colors.grey.shade500
+                      ),
+                      left: BorderSide(
+                          color: Colors.grey.shade500
+                      ),
+                      right: BorderSide(
+                          color: Colors.grey.shade500
+                      ),
+                    )
+                ),
+                child: Row(
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Icon(Icons.lock_open),
+                    ),
+                    Text('PIN',style: TextStyle(fontSize: 18),)
+                  ],
+                ),
+                width: 100,
+                height: 40,
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 120),
+                alignment: Alignment.bottomCenter,
+                child: RaisedButton(
+                  onPressed: (){},
+                  elevation: 10,
+                  color: Colors.blueAccent,
+                  child: Text('Redefinir senha.', style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              )
+            ],
+          ),
+        );
+      }
+  ));
 }
 
 class CustomListTile extends StatelessWidget {
@@ -233,8 +516,8 @@ class CustomListTile extends StatelessWidget {
           )
         ),
         height: 50,
-        child: InkWell(
-          onTap: (){ontap;},
+        child: FlatButton(
+          onPressed: ontap,
           splashColor: Colors.blueAccent,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
